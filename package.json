@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "https://github.com/avrcoelho/customers-favorite-products.git",
   "author": "Andre Coelho",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@sucrase/jest-plugin": "^2.0.0",
+    "jest": "^25.1.0"
+  }
 }

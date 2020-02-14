@@ -1,7 +1,9 @@
 import Customer from '../models/Customer';
 
 class CustomerController {
-  async index(req, res) {}
+  async index(req, res) {
+    res.send({ success: true });
+  }
 
   async show(req, res) {}
 

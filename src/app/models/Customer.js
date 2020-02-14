@@ -26,6 +26,6 @@ const CustomerSchema = new mongoose.Schema(
   },
 );
 
-UserSchema.plugin(mongoosePaginate);
+CustomerSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('Customer', CustomerSchema);

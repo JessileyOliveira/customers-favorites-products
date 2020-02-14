@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import http from 'http';
 import mongoose from 'mongoose';
 
+import routes from './routes';
 import databaseConfig from './config/database';
 
 class App {
@@ -13,6 +14,7 @@ class App {
 
     this.database();
     this.middlewares();
+    this.routes();
   }
 
   database() {
@@ -28,6 +30,10 @@ class App {
     this.express.use(express.json());
     this.express.use(helmet());
     this.express.use(cors());
+  }
+
+  routes() {
+    this.express.use(routes);
   }
 }
 

@@ -2,12 +2,17 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import http from 'http';
+import mongoose from 'mongoose';
+
+import databaseConfig from './config/database';
 
 class App {
   constructor() {
     this.express = express();
-
     this.server = http.Server(this.express);
+
+    this.database();
+    this.middlewares();
   }
 
   database() {

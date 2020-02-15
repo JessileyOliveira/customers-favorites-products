@@ -28,4 +28,4 @@ const CustomerSchema = new mongoose.Schema(
 
 CustomerSchema.plugin(mongoosePaginate);
 
-export default mongoose.model('Customer', CustomerSchema);
+export default mongoose.model('Customers', CustomerSchema);

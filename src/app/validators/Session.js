@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const ValidatorSession = async (req, res, next) => {
+const ValidatorSession = async (req, res, next) => {
   try {
     const schema = Yup.object().shape({
       email: Yup.string()
@@ -17,3 +17,5 @@ export const ValidatorSession = async (req, res, next) => {
       .json({ error: 'Validation fails', messages: err.inner });
   }
 };
+
+export default ValidatorSession;

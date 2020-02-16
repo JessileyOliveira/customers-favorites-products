@@ -15,7 +15,7 @@ describe('Customer', () => {
     token = response.body.token;
   });
 
-  afterEach(async () => {
+  beforeEach(async () => {
     await Customer.deleteMany({});
   });
 
@@ -77,5 +77,48 @@ describe('Customer', () => {
       expect.objectContaining({ error: 'customer already exists' }),
     );
     expect(response.status).toBe(409);
+  });
+
+  it('should be able to get customer data', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .get(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`);
+
+    expect(response.body).toHaveProperty('_id');
+    expect(response.status).toBe(200);
+  });
+
+  it('should be able dont find customer', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .get(`/customers/4${body._id.substr(1)}`)
+      .set('Authorization', `bearer ${token}`);
+
+    expect(response.body).toEqual(expect.objectContaining({}));
+    expect(response.status).toBe(200);
+  });
+
+  it('should be able to ID invalid', async () => {
+    const response = await request(app)
+      .get(`/customers/djfjaduisud`)
+      .set('Authorization', `bearer ${token}`);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({ error: 'ID invalid' }),
+    );
+    expect(response.status).toBe(500);
   });
 });

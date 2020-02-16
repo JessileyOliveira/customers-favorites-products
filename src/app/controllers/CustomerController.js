@@ -5,7 +5,17 @@ class CustomerController {
     res.send({ success: true });
   }
 
-  async show(req, res) {}
+  async show(req, res) {
+    const { id } = req.params;
+
+    try {
+      const customer = await Customer.findById(id);
+
+      return res.send(customer);
+    } catch (error) {
+      return res.status(500).send({ error: 'ID invalid' });
+    }
+  }
 
   async store(req, res) {
     const { email } = req.body;

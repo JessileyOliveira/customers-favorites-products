@@ -21,7 +21,7 @@ class SessionController {
       return res.status(200).send({ token });
     }
 
-    return res.status(404).send({ message: 'user not found' });
+    return res.status(404).send({ error: 'user not found' });
   }
 }
 

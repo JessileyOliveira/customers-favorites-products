@@ -13,7 +13,7 @@ class CustomerController {
 
       return res.send(customer);
     } catch (error) {
-      return res.status(500).send({ error: 'ID invalid' });
+      return res.status(400).send({ error: 'ID invalid' });
     }
   }
 
@@ -53,7 +53,7 @@ class CustomerController {
 
       return res.send(customer);
     } catch (error) {
-      return res.status(500).send({ error: 'ID invalid' });
+      return res.status(400).send({ error: 'ID invalid' });
     }
   }
 
@@ -65,7 +65,7 @@ class CustomerController {
 
       return res.send({ message: 'Customer deleted' });
     } catch (error) {
-      return res.status(500).send({ error: 'ID invalid' });
+      return res.status(400).send({ error: 'ID invalid' });
     }
   }
 }

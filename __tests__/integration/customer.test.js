@@ -15,7 +15,7 @@ describe('Customer', () => {
     token = response.body.token;
   });
 
-  beforeEach(async () => {
+  afterEach(async () => {
     await Customer.deleteMany({});
   });
 
@@ -119,7 +119,7 @@ describe('Customer', () => {
     expect(response.body).toEqual(
       expect.objectContaining({ error: 'ID invalid' }),
     );
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
   });
 
   it('should be able to ID invalid when delete customer', async () => {
@@ -130,7 +130,7 @@ describe('Customer', () => {
     expect(response.body).toEqual(
       expect.objectContaining({ error: 'ID invalid' }),
     );
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
   });
 
   it('should be able to delete customer', async () => {
@@ -162,7 +162,7 @@ describe('Customer', () => {
     expect(response.body).toEqual(
       expect.objectContaining({ error: 'ID invalid' }),
     );
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
   });
 
   it('Should be fields invalid customer update', async () => {

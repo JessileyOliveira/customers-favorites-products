@@ -39,7 +39,7 @@ describe('Customer', () => {
     );
   });
 
-  it('Should be fields invalid', async () => {
+  it('Should be fields invalid customer create', async () => {
     const response = await request(app)
       .post('/customers')
       .set('Authorization', `bearer ${token}`)
@@ -60,7 +60,7 @@ describe('Customer', () => {
     expect(response.body).toHaveProperty('_id');
   });
 
-  it('should be able to duplicate register', async () => {
+  it('should be able to check duplicate register', async () => {
     const customer = await factoryCustomer.attrs('Customers');
 
     await request(app)
@@ -111,14 +111,128 @@ describe('Customer', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should be able to ID invalid', async () => {
+  it('should be able to ID invalid when get customer', async () => {
     const response = await request(app)
-      .get(`/customers/djfjaduisud`)
+      .get('/customers/djfjaduisud')
       .set('Authorization', `bearer ${token}`);
 
     expect(response.body).toEqual(
       expect.objectContaining({ error: 'ID invalid' }),
     );
     expect(response.status).toBe(500);
+  });
+
+  it('should be able to ID invalid when delete customer', async () => {
+    const response = await request(app)
+      .delete('/customers/djfjaduisud')
+      .set('Authorization', `bearer ${token}`);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({ error: 'ID invalid' }),
+    );
+    expect(response.status).toBe(500);
+  });
+
+  it('should be able to delete customer', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .delete(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({ message: 'Customer deleted' }),
+    );
+    expect(response.status).toBe(200);
+  });
+
+  it('should be able to ID invalid when update customer', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const response = await request(app)
+      .put('/customers/djfjaduisud')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({ error: 'ID invalid' }),
+    );
+    expect(response.status).toBe(500);
+  });
+
+  it('Should be fields invalid customer update', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .put(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`)
+      .send({ name: 'Tester Invalid' });
+
+    expect(response.status).toBe(422);
+  });
+
+  it('Should be fields invalid customer update', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .put(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`)
+      .send({ name: 'Tester Invalid' });
+
+    expect(response.status).toBe(422);
+  });
+
+  it('Should be able to check duplicate email when customer update', async () => {
+    await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send({ name: 'Customer Test one', email: 'testone@test.com.br' });
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send({ name: 'Customer Test two', email: 'testtwo@test.com.br' });
+
+    const response = await request(app)
+      .put(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`)
+      .send({ name: 'Customer Test New', email: 'testone@test.com.br' });
+
+    expect(response.body).toEqual(
+      expect.objectContaining({ error: 'customer already exists' }),
+    );
+    expect(response.status).toBe(409);
+  });
+
+  it('Should be able to customer update', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    const { body } = await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const response = await request(app)
+      .put(`/customers/${body._id}`)
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    expect(response.body).toHaveProperty('_id');
+    expect(response.status).toBe(200);
   });
 });

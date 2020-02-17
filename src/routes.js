@@ -16,7 +16,12 @@ const routes = express.Router();
 routes.get('/customers', auth, CustomerController.index);
 routes.get('/customers/:id', auth, CustomerController.show);
 routes.post('/customers', auth, validatorCustomer, CustomerController.store);
-routes.put('/customers/:id', auth, CustomerController.update);
+routes.put(
+  '/customers/:id',
+  auth,
+  validatorCustomer,
+  CustomerController.update,
+);
 routes.delete('/customers/:id', auth, CustomerController.destroy);
 
 routes.post('/sessions', validatorSession, SessionController.store);

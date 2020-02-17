@@ -235,4 +235,38 @@ describe('Customer', () => {
     expect(response.body).toHaveProperty('_id');
     expect(response.status).toBe(200);
   });
+
+  it('Should be able to get customers', async () => {
+    const customer = await factoryCustomer.attrs('Customers');
+
+    await request(app)
+      .post('/customers')
+      .set('Authorization', `bearer ${token}`)
+      .send(customer);
+
+    const { body } = await request(app)
+      .get('/customers')
+      .set('Authorization', `bearer ${token}`);
+
+    expect(body).toHaveProperty('docs');
+    expect(!!body.docs.length).toBe(true);
+    expect(body.docs[0]).toHaveProperty('_id');
+  });
+
+  it('Should be able to dont returned customers', async () => {
+    const { body } = await request(app)
+      .get('/customers')
+      .set('Authorization', `bearer ${token}`);
+
+    expect(body).toHaveProperty('docs');
+    expect(!!body.docs.length).toBe(false);
+  });
+
+  it('Should be able to return pages differents', async () => {
+    const { body } = await request(app)
+      .get('/customers?page=2')
+      .set('Authorization', `bearer ${token}`);
+
+    expect(body).toEqual(expect.objectContaining({ page: '2' }));
+  });
 });

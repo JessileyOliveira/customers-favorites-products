@@ -2,7 +2,16 @@ import Customer from '../models/Customer';
 
 class CustomerController {
   async index(req, res) {
-    res.send({ success: true });
+    const customers = await Customer.paginate(
+      {},
+      {
+        page: req.query.page || 1,
+        limit: 20,
+        sort: 'name',
+      },
+    );
+
+    return res.json(customers);
   }
 
   async show(req, res) {

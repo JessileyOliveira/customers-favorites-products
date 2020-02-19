@@ -15,7 +15,7 @@ const CustomerSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    favoriteProducts: {
+    favoritesProducts: {
       type: Array,
       required: false,
       default: [],

@@ -50,7 +50,7 @@ class FavoriteProductController {
 
       await customer.save();
 
-      return res.send(customer.favoritesProducts);
+      return res.send(data);
     } catch (error) {
       if (error instanceof _mongoose2.default.Error) {
         return res.status(400).send({ error: 'ID invalid' });

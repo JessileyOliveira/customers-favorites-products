@@ -97,7 +97,7 @@ describe('Favotire products', () => {
       .set('Authorization', `bearer ${token}`)
       .send({ productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f' });
 
-    expect(response.body[0]).toHaveProperty('title');
+    expect(response.body).toHaveProperty('title');
     expect(response.status).toBe(200);
   });
 
@@ -217,8 +217,9 @@ describe('Favotire products', () => {
       )
       .set('Authorization', `bearer ${token}`);
 
-    expect(response.body).toHaveProperty('favoritesProducts');
-    expect(!!response.body.favoritesProducts.length).toBe(false);
+    expect(response.body).toEqual(
+      expect.objectContaining({ message: 'Product deleted' }),
+    );
     expect(response.status).toBe(200);
   });
 });

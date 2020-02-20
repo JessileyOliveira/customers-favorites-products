@@ -50,7 +50,7 @@ class FavoriteProductController {
 
       await customer.save();
 
-      return res.send(customer.favoritesProducts);
+      return res.send(data);
     } catch (error) {
       if (error instanceof mongoose.Error) {
         return res.status(400).send({ error: 'ID invalid' });
@@ -74,9 +74,9 @@ class FavoriteProductController {
 
       customer.favoritesProducts = customerFavoritesProducts;
 
-      customer.save();
+      await customer.save();
 
-      return res.send(customer);
+      return res.send({ message: 'Product deleted' });
     } catch (error) {
       return res.status(400).send({ error: 'ID invalid' });
     }

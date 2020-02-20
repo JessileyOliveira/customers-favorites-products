@@ -8,6 +8,7 @@ class CustomerController {
         page: req.query.page || 1,
         limit: 20,
         sort: 'name',
+        select: 'name email',
       },
     );
 
@@ -18,7 +19,7 @@ class CustomerController {
     const { id } = req.params;
 
     try {
-      const customer = await Customer.findById(id);
+      const customer = await Customer.findById(id).select('name email');
 
       return res.send(customer);
     } catch (error) {

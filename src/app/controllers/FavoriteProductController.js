@@ -5,7 +5,19 @@ import Customer from '../models/Customer';
 import api from '../services/api';
 
 class FavoriteProductController {
-  async show(req, res) {}
+  async show(req, res) {
+    const { id } = req.params;
+
+    try {
+      const favoritesProducts = await Customer.findById(id).select(
+        'favoritesProducts',
+      );
+
+      return res.send(favoritesProducts);
+    } catch (error) {
+      return res.status(400).send({ error: 'ID invalid' });
+    }
+  }
 
   async store(req, res) {
     const { productId } = req.body;
@@ -48,7 +60,27 @@ class FavoriteProductController {
     }
   }
 
-  async destroy(req, res) {}
+  async destroy(req, res) {
+    const { customerId, productId } = req.params;
+
+    try {
+      const customer = await Customer.findById(customerId).select(
+        'favoritesProducts',
+      );
+
+      const customerFavoritesProducts = customer.favoritesProducts.filter(
+        favoriteProduct => favoriteProduct.id !== productId,
+      );
+
+      customer.favoritesProducts = customerFavoritesProducts;
+
+      customer.save();
+
+      return res.send(customer);
+    } catch (error) {
+      return res.status(400).send({ error: 'ID invalid' });
+    }
+  }
 }
 
 export default new FavoriteProductController();

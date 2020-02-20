@@ -29,18 +29,18 @@ routes.put(
 routes.delete('/customers/:id', auth, CustomerController.destroy);
 
 routes.get(
-  '/customers/:id/favoritesProducts',
+  '/customers/:id/favorites-products',
   auth,
   FavoriteProductController.show,
 );
 routes.post(
-  '/customers/:id/favoritesProducts',
+  '/customers/:id/favorites-products',
   auth,
   validatorFavoriteProduct,
   FavoriteProductController.store,
 );
 routes.delete(
-  '/customers/:customerId/favoritesProducts/:productId',
+  '/customers/:customerId/favorites-products/:productId',
   auth,
   FavoriteProductController.destroy,
 );

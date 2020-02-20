@@ -59,6 +59,10 @@ class CustomerController {
 
       const customer = await Customer.findByIdAndUpdate(id, req.body, {
         new: true,
+        projection: {
+          name: 1,
+          email: 1,
+        },
       });
 
       return res.send(customer);

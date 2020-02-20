@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "test": "jest -i"
+    "test": "jest -i",
+    "build": "sucrase ./src -d ./dist --transforms imports"
   },
   "devDependencies": {
     "@sucrase/jest-plugin": "^2.0.0",

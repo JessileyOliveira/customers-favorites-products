@@ -4,7 +4,7 @@
 
 ## Instalação
 
-_Tenha instalado em sua maquina o [Git](http://git-scm.com/) e [Node.js](http://nodejs.org/) 10.0.0 (ou superior). Caso prefire instale o [Yarn](https://yarnpkg.com/)._
+_Tenha instalado em sua maquina o [Git](http://git-scm.com/) e [Node.js](http://nodejs.org/) 10.0.0 (ou superior). Caso prefira, instale o [Yarn](https://yarnpkg.com/)._
 
 _Você também precisará do [mongoDB](https://www.mongodb.com/), mas poderá executá-lo através do [Docker](https://www.docker.com/) no `docker-compose.yml`._
 

@@ -150,11 +150,19 @@ Exclui um cliente
 
 Adiciona um produto favorito para um cliente
 
+```json
+{
+  "productId": "<ID_PRODUTO>"
+}
+```
+
+_ID de um produto disponivel na API de productos do Magalu [neste link](http://challenge-api.luizalabs.com/api/product/?page=1)_
+
 #### `GET`: `/customers/<ID_CLIENTE>/favorites-products`
 
 Obtem a lista de produtos favoritos de um cliente
 
-#### `DELETE`: `/customers/<ID_CLIENTE>/favorites-products<ID_PRODUTO>`
+#### `DELETE`: `/customers/<ID_CLIENTE>/favorites-products/<ID_PRODUTO>`
 
 Exclui um produto da lista de favoritos de um cliente
 

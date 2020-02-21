@@ -1,4 +1,5 @@
 node_modules
+__tests__/coverage
 yarn.lock
 .env
-__tests__/coverage
+package-lock.json

@@ -3,3 +3,4 @@ __tests__/coverage
 yarn.lock
 .env
 package-lock.json
+dist

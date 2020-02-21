@@ -156,7 +156,7 @@ Adiciona um produto favorito para um cliente
 }
 ```
 
-_ID de um produto disponivel na API de productos do Magalu [neste link](http://challenge-api.luizalabs.com/api/product/?page=1)_
+_ID de um produto disponivel na API de produtos do Magalu [neste link](http://challenge-api.luizalabs.com/api/product/?page=1)_
 
 #### `GET`: `/customers/<ID_CLIENTE>/favorites-products`
 

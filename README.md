@@ -71,7 +71,7 @@ ou
 yarn build
 ```
 
-_Isso irá criar um diretórios `dist` na raiz, com a aplicacão preparada para ser executada em producão. Execute o comando abaixo dentro do direrório `dist` para poder executar a aplicação:_
+_Isso irá criar um diretório `dist` na raiz, com a aplicacão preparada para ser executada em producão. Execute o comando abaixo dentro do direrório `dist` para poder executar a aplicação:_
 
 ```sh
 node server.js
